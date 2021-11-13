@@ -31,36 +31,43 @@ function startgame() {
         {
             name: 'colors',
             img: 'images/colors.png'
+           
             
         },
         {
             name: 'gray',
             img: 'images/gray.png'
             
+            
         },
         {
             name: 'gray',
             img: 'images/gray.png'
             
-        },
-        {
-            name: 'green',
-            img: 'images/green.png'
             
         },
         {
             name: 'green',
             img: 'images/green.png'
             
+            
         },
         {
-            name: 'stripes',
-            img: 'images/stripes.png'
+            name: 'green',
+            img: 'images/green.png'
+            
             
         },
         {
             name: 'stripes',
             img: 'images/stripes.png'
+            
+            
+        },
+        {
+            name: 'stripes',
+            img: 'images/stripes.png'
+            
             
         }
     ]
@@ -71,6 +78,8 @@ function startgame() {
 
     var cardChosen = [];
     var cardChosenId = [];
+    var score = 0;
+    // if card is chosen is should not be flippable again.
 
     function createboard() {
 
@@ -81,6 +90,7 @@ function startgame() {
             image.setAttribute('width', '100px');
             image.setAttribute('height', '100px');
             image.setAttribute('data-id', i);
+            image.setAttribute('clickable', 'yes');
             image.addEventListener('click', flipcard);
             gridbox.appendChild(image);
         }
@@ -92,10 +102,18 @@ function startgame() {
         var cards = document.querySelectorAll('img');
         const optionOneId = cardChosenId[0];
         const optionTwoId = cardChosenId[1];
-        if (cardChosen[0] === cardChosen[1]) {
-            alert('you found a match');
+        if (cardChosen[0] === cardChosen[1] && cardChosenId[0] != cardChosenId[1]) {
+            
             cards[optionOneId].setAttribute('src', 'images/white.png');
             cards[optionTwoId].setAttribute('src', 'images/white.png');
+            cards[optionOneId].setAttribute('clickable', 'no');
+            cards[optionTwoId].setAttribute('clickable', 'no');
+            score += 1;
+
+            if(score === 6) {
+
+                alert("You won");
+            }
         } else {
 
         cards[optionOneId].setAttribute('src', 'images/blank.png');
@@ -107,8 +125,10 @@ function startgame() {
     }
 
     function flipcard() {
-
+   
+        if (this.getAttribute('clickable') == 'yes') {
         var imageId = this.getAttribute('data-id');
+        
         cardChosen.push(cardarray[imageId].name);
         cardChosenId.push(imageId);
         this.setAttribute('src', cardarray[imageId].img);
@@ -116,6 +136,10 @@ function startgame() {
         if (cardChosenId.length === 2) {
             setTimeout(checkForMatch, 500);
         }
+
+        }
+
+
     }
 
 }
