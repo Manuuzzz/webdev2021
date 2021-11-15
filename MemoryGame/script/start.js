@@ -4,74 +4,75 @@ function startgame() {
     const cardarray = [
         
         {
-            name: 'blue',
-            img: 'images/blue.png'
+            name: '1',
+            img: 'images/1.jpg'
             
         },
         {
-            name: 'blue',
-            img: 'images/blue.png'
+            name: '1',
+            img: 'images/1.jpg'
             
         },
         {
-            name: 'brown',
-            img: 'images/brown.png'
+            name: '2',
+            img: 'images/2.jpg'
             
         },
         {
-            name: 'brown',
-            img: 'images/brown.png'
+            name: '2',
+            img: 'images/2.jpg'
             
         },
         {
-            name: 'colors',
-            img: 'images/colors.png'
+            name: '3',
+            img: 'images/3.jpg'
             
         },
         {
-            name: 'colors',
-            img: 'images/colors.png'
+            name: '3',
+            img: 'images/3.jpg'
            
             
         },
         {
-            name: 'gray',
-            img: 'images/gray.png'
+            name: '4',
+            img: 'images/4.jpg'
             
             
         },
         {
-            name: 'gray',
-            img: 'images/gray.png'
+            name: '4',
+            img: 'images/4.jpg'
             
             
         },
         {
-            name: 'green',
-            img: 'images/green.png'
+            name: '5',
+            img: 'images/5.jpg'
             
             
         },
         {
-            name: 'green',
-            img: 'images/green.png'
+            name: '5',
+            img: 'images/5.jpg'
             
             
         },
         {
-            name: 'stripes',
-            img: 'images/stripes.png'
+            name: '6',
+            img: 'images/6.jpg'
             
             
         },
         {
-            name: 'stripes',
-            img: 'images/stripes.png'
+            name: '6',
+            img: 'images/6.jpg'
             
             
         }
     ]
     
+    cardarray.sort( () => 0.5 - Math.random());
 
     const gridbox = document.querySelector(".gridbox");
     createboard();
@@ -79,6 +80,7 @@ function startgame() {
     var cardChosen = [];
     var cardChosenId = [];
     var score = 0;
+    var tries = 0;
     // if card is chosen is should not be flippable again.
 
     function createboard() {
@@ -110,9 +112,9 @@ function startgame() {
             cards[optionTwoId].setAttribute('clickable', 'no');
             score += 1;
 
-            if(score === 6) {
+            if(score === (cardarray.length /2)) {
 
-                alert("You won");
+                alert("You won in " + tries + " tries!");
             }
         } else {
 
@@ -135,6 +137,7 @@ function startgame() {
 
         if (cardChosenId.length === 2) {
             setTimeout(checkForMatch, 500);
+            tries += 1;
         }
 
         }
