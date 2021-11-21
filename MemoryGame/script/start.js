@@ -72,7 +72,19 @@ function startgame() {
         }
     ]
     
-    cardarray.sort( () => 0.5 - Math.random());
+    cardarray.sort( () => 0.4 - Math.random());
+
+    // added some extra randomization as the last item is the same a lot of times
+    var lastitem = cardarray.pop();
+    console.log(lastitem);
+    randomPos = Math.floor(Math.random() * cardarray.length);
+    console.log(randomPos);
+    cardarray.splice(randomPos,0,lastitem);
+    var lastitem = cardarray.pop();
+    console.log(lastitem);
+    randomPos = Math.floor(Math.random() * cardarray.length);
+    console.log(randomPos);
+    cardarray.splice(randomPos,0,lastitem);
 
     const gridbox = document.querySelector(".gridbox");
     createboard();
@@ -81,7 +93,7 @@ function startgame() {
     var cardChosenId = [];
     var score = 0;
     var tries = 0;
-    // if card is chosen is should not be flippable again.
+    
 
     function createboard() {
 
@@ -89,8 +101,9 @@ function startgame() {
 
             var image = document.createElement('img');
             image.setAttribute('src', 'images/blank.png');
-            image.setAttribute('width', '100px');
-            image.setAttribute('height', '100px');
+            image.setAttribute('width', '200px');
+            image.setAttribute('height', '200px');
+            image.setAttribute('class', 'border_blank');
             image.setAttribute('data-id', i);
             image.setAttribute('clickable', 'yes');
             image.addEventListener('click', flipcard);
@@ -109,7 +122,9 @@ function startgame() {
             cards[optionOneId].setAttribute('src', 'images/white.png');
             cards[optionTwoId].setAttribute('src', 'images/white.png');
             cards[optionOneId].setAttribute('clickable', 'no');
+            cards[optionOneId].setAttribute('class', 'border_flipped');
             cards[optionTwoId].setAttribute('clickable', 'no');
+            cards[optionTwoId].setAttribute('class', 'border_flipped');
             score += 1;
 
             if(score === (cardarray.length /2)) {
@@ -134,6 +149,7 @@ function startgame() {
         cardChosen.push(cardarray[imageId].name);
         cardChosenId.push(imageId);
         this.setAttribute('src', cardarray[imageId].img);
+        
 
         if (cardChosenId.length === 2) {
             setTimeout(checkForMatch, 500);
