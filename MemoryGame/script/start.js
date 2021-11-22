@@ -147,7 +147,7 @@ function startgame() {
     async function flipcard() {
 
         
-    count += 1;
+   
 
     if (count < 3) {
 
@@ -156,6 +156,7 @@ function startgame() {
         if(cardChosenId.length < 2) {
 
         if (this.getAttribute('clickable') == 'yes') {
+            count += 1;
             var imageId = this.getAttribute('data-id');
             
             cardChosen.push(cardarray[imageId].name);
