@@ -1,3 +1,5 @@
+//todo: refactor code
+
 function startgame() {
    
     
