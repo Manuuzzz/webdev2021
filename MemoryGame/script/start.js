@@ -93,6 +93,7 @@ function startgame() {
     var cardChosenId = [];
     var score = 0;
     var tries = 0;
+    var count = 0;
     
 
     function createboard() {
@@ -126,6 +127,7 @@ function startgame() {
             cards[optionTwoId].setAttribute('clickable', 'no');
             cards[optionTwoId].setAttribute('class', 'border_flipped');
             score += 1;
+            count = 0;
 
             if(score === (cardarray.length /2)) {
 
@@ -135,30 +137,47 @@ function startgame() {
 
         cards[optionOneId].setAttribute('src', 'images/blank.png');
         cards[optionTwoId].setAttribute('src', 'images/blank.png');
+        count = 0;
         }
 
         cardChosenId = [];
         cardChosen = [];
     }
 
-    function flipcard() {
-   
+    async function flipcard() {
+
+        
+    count += 1;
+
+    if (count < 3) {
+
+        
+
+        if(cardChosenId.length < 2) {
+
         if (this.getAttribute('clickable') == 'yes') {
-        var imageId = this.getAttribute('data-id');
-        
-        cardChosen.push(cardarray[imageId].name);
-        cardChosenId.push(imageId);
-        this.setAttribute('src', cardarray[imageId].img);
-        
-
-        if (cardChosenId.length === 2) {
-            setTimeout(checkForMatch, 500);
-            tries += 1;
+            var imageId = this.getAttribute('data-id');
+            
+            cardChosen.push(cardarray[imageId].name);
+            cardChosenId.push(imageId);
+            this.setAttribute('src', cardarray[imageId].img);
+           
+            
+            }
         }
+    
 
-        }
-
-
+        if(cardChosenId.length  === 2) {
+            await(setTimeout(checkForMatch, 500));
+            tries += 1; 
+            
+                } 
+        
+      
     }
+
+}
+
+    
 
 }
